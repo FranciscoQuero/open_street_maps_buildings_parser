@@ -2,14 +2,14 @@ import requests
 
 
 class OpenStreetMapConnector(object):
-    MAP_URI = 'https://api.openstreetmap.org/api/0.6/map'
+    MAP_URI = 'https://api.openstreetmap.org/api/0.6/map.json'
 
     def __init__(self, boundaries):
         self._boundaries = boundaries
 
     def get_map_in_boundaries(self):
         boundaries_box = self._get_boundaries_box()
-        payload = {'ContentType': 'json', 'Timeout': 10, 'bbox': boundaries_box}
+        payload = {'bbox': boundaries_box}
         map_file = requests.get(self.MAP_URI, params=payload)
         return map_file
 

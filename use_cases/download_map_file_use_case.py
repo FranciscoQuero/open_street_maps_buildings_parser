@@ -1,5 +1,6 @@
 from connectors.open_street_maps_connector import OpenStreetMapConnector
 from entities.map_boundaries import MapBoundaries
+from repositories.map_file_data_access import MapFileDataAccess
 
 
 class DownloadMapFileUseCase(object):
@@ -10,6 +11,8 @@ class DownloadMapFileUseCase(object):
 
     def run(self):
         self._downloaded_map = self._connector.get_map_in_boundaries()
+        data_access = MapFileDataAccess()
+        data_access.save_map_file(self._downloaded_map)
 
     def get_downloaded_map(self):
         return self._downloaded_map
