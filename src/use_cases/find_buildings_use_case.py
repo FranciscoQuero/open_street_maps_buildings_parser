@@ -1,4 +1,4 @@
-from entities.map_element import MapElement
+from src.entities.map_element import MapElement
 
 
 class FindBuildingsUseCase(object):
@@ -33,13 +33,23 @@ class FindBuildingsUseCase(object):
     def _generate_map_elements_from_buildings(self, buildings, nodes_dictionary):
         for building in buildings:
             if 'nodes' in building:
-                node_id = building['nodes'][0]
-                node = nodes_dictionary[node_id]
-                latitude = node['lat']
-                longitude = node['lon']
-                type = building['tags']['building']
-                map_element = MapElement(latitude, longitude, type)
+                latitude, longitude = self._calculate_mean_coordinates(building, nodes_dictionary)
+                building_type = building['tags']['building']
+                map_element = MapElement(latitude, longitude, building_type)
                 self._map_elements.append(map_element)
+
+    def _calculate_mean_coordinates(self, building, nodes_dictionary):
+        latitudes = []
+        longitudes = []
+        for i in range(0, len(building['nodes'])):
+            node_id = building['nodes'][i]
+            node = nodes_dictionary[node_id]
+            latitudes.append(node['lat'])
+            longitudes.append(node['lon'])
+        latitude = sum(latitudes) / len(latitudes)
+        longitude = sum(longitudes) / len(longitudes)
+
+        return latitude, longitude
 
     def get_buildings_map_elements(self):
         return self._map_elements

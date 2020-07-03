@@ -1,6 +1,6 @@
-from connectors.open_street_maps_connector import OpenStreetMapConnector
-from entities.map_boundaries import MapBoundaries
-from repositories.map_file_data_access import MapFileDataAccess
+from src.connectors.open_street_maps_connector import OpenStreetMapConnector
+from src.entities.map_boundaries import MapBoundaries
+from src.repositories.map_file_data_access import MapFileDataAccess
 
 
 class DownloadMapFileUseCase(object):

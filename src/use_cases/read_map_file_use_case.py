@@ -1,4 +1,4 @@
-from repositories.map_file_data_access import MapFileDataAccess
+from src.repositories.map_file_data_access import MapFileDataAccess
 
 
 class ReadMapFileUseCase(object):

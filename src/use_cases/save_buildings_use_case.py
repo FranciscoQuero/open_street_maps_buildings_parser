@@ -1,4 +1,4 @@
-from repositories.buildings_data_access import BuildingsDataAccess
+from src.repositories.buildings_data_access import BuildingsDataAccess
 
 
 class SaveBuildingsUseCase(object):
